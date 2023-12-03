@@ -332,6 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 539429224}
   - component: {fileID: 539429222}
+  - component: {fileID: 539429226}
   - component: {fileID: 539429223}
   - component: {fileID: 539429225}
   m_Layer: 0
@@ -422,6 +423,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &539429226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539429221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf8f0f9e0cc7214c972544a41ac5aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FOV: 90
+  range: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3
+  IsInSight: 0
+  target: {fileID: 1267729045}
 --- !u!1001 &593971748
 PrefabInstance:
   m_ObjectHideFlags: 0

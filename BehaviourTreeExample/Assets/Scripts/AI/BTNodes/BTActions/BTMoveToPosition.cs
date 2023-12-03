@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -55,14 +53,14 @@ public class BTGetNextPatrolPosition : BTBaseNode
 
     protected override void OnEnter()
     {
-        int currentIndex = blackboard.GetVariable<int>(VariableNames.CURRENT_PATROL_INDEX);
+        int currentIndex = blackboard.GetVariable<int>(VariableNames.INT_CURRENT_PATROL_INDEX);
         currentIndex++;
         if(currentIndex >= wayPoints.Length)
         {
             currentIndex = 0;
         }
-        blackboard.SetVariable<int>(VariableNames.CURRENT_PATROL_INDEX, currentIndex);
-        blackboard.SetVariable<Vector3>(VariableNames.TARGET_POSITION, wayPoints[currentIndex].position);
+        blackboard.SetVariable<int>(VariableNames.INT_CURRENT_PATROL_INDEX, currentIndex);
+        blackboard.SetVariable<Vector3>(VariableNames.V3_TARGET_POSITION, wayPoints[currentIndex].position);
     }
 
     protected override TaskStatus OnUpdate()
