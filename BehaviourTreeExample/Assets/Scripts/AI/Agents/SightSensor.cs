@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class SightSensor : MonoBehaviour
 {
-    [Range(0, 90f)]
-    [SerializeField] private int FOV;
+    [SerializeField, Range(0,90f)] private int FOV;
     [SerializeField] private float range;
     [SerializeField] LayerMask layerMask;
 
-    [SerializeField] private bool IsInSight;
+    public Blackboard blackboard;
     [SerializeField] private Transform target;
 
     void Start()
     {
-        
     }
 
     void Update()
     {
+        if (blackboard == null) return;
+        if (target == null) return;
+
         RaycastHit hit = new RaycastHit();
         Ray ray = new Ray(transform.position, target.transform.position - transform.position);
 
@@ -28,8 +29,12 @@ public class SightSensor : MonoBehaviour
             {
                 if (hit.transform.GetComponent<Player>() != null)
                 {
-
-                    Debug.Log("Player in sight!");
+                    blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_IN_SIGHT, true);
+                    EventManager.InvokeEvent(EventType.SpottedPlayer);
+                }
+                else
+                {
+                    blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_IN_SIGHT, false);
                 }
             }
         }

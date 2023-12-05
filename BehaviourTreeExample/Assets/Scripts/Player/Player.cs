@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public Transform Camera;
     [SerializeField] private float rotationSpeed = 180f;
@@ -103,5 +103,15 @@ public class Player : MonoBehaviour
         {
             animator.CrossFade(animationName, fadeTime);
         }
+    }
+
+    public void Damage()
+    {
+        Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("Died");
     }
 }

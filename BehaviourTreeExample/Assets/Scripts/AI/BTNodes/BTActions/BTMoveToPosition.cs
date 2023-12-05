@@ -16,12 +16,21 @@ public class BTMoveToPosition : BTBaseNode
         this.BBtargetPosition = BBtargetPosition;
         this.keepDistance = keepDistance;
     }
+    public BTMoveToPosition(NavMeshAgent agent, float moveSpeed, Vector3 targetPosition, float keepDistance)
+    {
+        this.agent = agent;
+        this.moveSpeed = moveSpeed;
+        this.targetPosition = targetPosition;
+        this.keepDistance = keepDistance;
+    }
 
     protected override void OnEnter()
     {
+        blackboard.SetVariable(VariableNames.BTBN_CURRENT_NODE, this);
         agent.speed = moveSpeed;
         agent.stoppingDistance = keepDistance;
-        targetPosition = blackboard.GetVariable<Vector3>(BBtargetPosition);
+
+        targetPosition = blackboard.GetVariable<Vector3>(BBtargetPosition); 
     }
 
     protected override TaskStatus OnUpdate()
