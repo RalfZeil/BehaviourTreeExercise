@@ -14,6 +14,8 @@ public abstract class BTBaseNode
         {
             OnEnter();
             wasEntered = true;
+
+            blackboard.SetVariable(VariableNames.BTBN_CURRENT_NODE, this);
         }
 
         var result = OnUpdate();

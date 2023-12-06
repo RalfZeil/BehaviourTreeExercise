@@ -24,7 +24,6 @@ public class BTPickupWeapon : BTBaseNode
 
     protected override void OnEnter()
     {
-        blackboard.SetVariable(VariableNames.BTBN_CURRENT_NODE, this);
         timer = maxTimer;
     }
 }

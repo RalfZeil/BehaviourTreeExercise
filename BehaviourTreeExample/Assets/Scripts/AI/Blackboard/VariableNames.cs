@@ -7,8 +7,10 @@
     public const string V3_WEAPON_LOCATION = "V3_WEAPON_LOCATION";
     public const string BOOL_IS_PLAYER_IN_SIGHT = "BOOL_IS_PLAYER_IN_SIGHT";
     public const string BOOL_IS_PLAYER_IN_RANGE = "BOOL_IS_PLAYER_IN_RANGE";
+    public const string BOOL_IS_BLINDED = "BOOL_IS_BLINDED";
     public const string BOOL_HAS_WEAPON = "BOOL_HAS_WEAPON";
     public const string AGENT = "AGENT";
     public const string V3_TARGET = "V3_TARGET";
     public const string BOOL_IS_PLAYER_TARGETED = "BOOL_IS_PLAYER_TARGETED";
+    public const string V3_NEAREST_HIDING_SPOT = "V3_NEAREST_HIDING_SPOT";
 }

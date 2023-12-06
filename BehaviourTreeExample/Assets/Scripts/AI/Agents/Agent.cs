@@ -11,6 +11,9 @@ public abstract class Agent : MonoBehaviour
     protected Animator animator;
     protected Blackboard blackboard;
 
+    //Senses
+    public bool blinded;
+
     protected void Awake()
     {
         nmAgent = GetComponent<NavMeshAgent>();

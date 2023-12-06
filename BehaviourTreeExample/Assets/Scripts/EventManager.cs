@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public enum EventType
 {
     SpottedPlayer = 0,
+    UnspottedPlayer = 1,
 }
 
 public static class EventManager

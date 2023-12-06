@@ -11,7 +11,6 @@ public class BTConditional : BTComposite
     {
         if (blackboard.GetVariable<bool>(condition))
         {
-            // The true child
             return children[0].Tick();
         }
         else

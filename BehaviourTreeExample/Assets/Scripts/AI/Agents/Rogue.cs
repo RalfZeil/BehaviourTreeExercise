@@ -7,14 +7,24 @@ public class Rogue : Agent
 
     [SerializeField] private Player player;
 
+    [SerializeField] private GameObject smokebombPrefab;
+
     private void Start()
     {
-        //TODO: Create your Behaviour tree here
+        EventManager.AddListener(EventType.SpottedPlayer, () => blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_TARGETED, true));
+        EventManager.AddListener(EventType.UnspottedPlayer, () => blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_TARGETED, false));
+
         blackboard = new Blackboard();
         blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_TARGETED, false);
+        blackboard.SetVariable(VariableNames.AGENT, this);
 
         tree = new BTConditional( VariableNames.BOOL_IS_PLAYER_TARGETED,
                    new BTSequence( // Hide from guard and throw smokebomb
+                       new BTGetNearestHidingSpot(HidingSpots.instance.hidingObjects.ToArray(), transform),
+                       new BTMoveToPosition(nmAgent, moveSpeed, VariableNames.V3_NEAREST_HIDING_SPOT, 1f),
+                       new BTCrossfadeAnimation(animator, "Crouch Idle", 0.5f),
+                       new BTThrow(smokebombPrefab, VariableNames.V3_TARGET),
+                       new BTWait(5f)
                    ),
                    new BTSequence( // Move to player
                        new BTCrossfadeAnimation(animator, "Walk Crouch", 0.2f),
@@ -28,7 +38,6 @@ public class Rogue : Agent
     private void FixedUpdate()
     {
         blackboard.SetVariable(VariableNames.V3_TARGET, player.transform.position);
-
         tree?.Tick();
     }
 }

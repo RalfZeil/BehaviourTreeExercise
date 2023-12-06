@@ -4,6 +4,7 @@ public class BTWait : BTBaseNode
 {
     float maxTime;
     float time;
+
     public BTWait(float waitTime)
     {
         this.maxTime = waitTime;

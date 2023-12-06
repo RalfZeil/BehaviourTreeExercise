@@ -28,33 +28,40 @@ public class Guard : Agent
         Debug.Log(blackboard.GetVariable<Vector3>(VariableNames.V3_TARGET));
 
         tree =
-            new BTConditional(VariableNames.BOOL_IS_PLAYER_IN_SIGHT,
-                new BTConditional(VariableNames.BOOL_HAS_WEAPON,
-                        new BTSequence(
-                            new BTSequence (
-                                new BTCrossfadeAnimation(animator, "Run", 0f),
-                                new BTMoveToPosition(nmAgent, runSpeed, VariableNames.V3_TARGET, keepDistance)
+            new BTConditional(VariableNames.BOOL_IS_BLINDED,
+                new BTSequence(
+                    new BTCrossfadeAnimation(animator, "Scared", 0.5f),
+                    new BTWait(3f)
+                ),
+                new BTConditional(VariableNames.BOOL_IS_PLAYER_IN_SIGHT,
+                    new BTConditional(VariableNames.BOOL_HAS_WEAPON,
+                            new BTSequence(
+                                new BTSequence(
+                                    new BTCrossfadeAnimation(animator, "Run", 0f),
+                                    new BTMoveToPosition(nmAgent, runSpeed, VariableNames.V3_TARGET, keepDistance)
+                                ),
+                                new BTSequence(
+                                    new BTCrossfadeAnimation(animator, "Kick", 0f),
+                                    new BTAttack(1f, 1f, this.transform)
+                                )
                             ),
                             new BTSequence(
-                                new BTCrossfadeAnimation(animator, "Kick", 0f),
-                                new BTAttack(1f, 1f, this.transform)
-                            )                    
-                        ),
+                                new BTCrossfadeAnimation(animator, "Run", 1f),
+                                new BTMoveToPosition(nmAgent, runSpeed, VariableNames.V3_WEAPON_LOCATION, keepDistance),
+                                new BTCrossfadeAnimation(animator, "Crouch Idle", 0.1f),
+                                new BTPickupWeapon(2f)
+                            )
+                    ),
+                    new BTRepeater(wayPoints.Length,
                         new BTSequence(
-                            new BTCrossfadeAnimation(animator, "Run", 1f),
-                            new BTMoveToPosition(nmAgent, runSpeed, VariableNames.V3_WEAPON_LOCATION, keepDistance),
-                            new BTCrossfadeAnimation(animator, "Crouch Idle", 0.1f),
-                            new BTPickupWeapon(2f)
+                            new BTCrossfadeAnimation(animator, "Rifle Walk", 1f),
+                            new BTGetNextPatrolPosition(wayPoints),
+                            new BTMoveToPosition(nmAgent, moveSpeed, VariableNames.V3_TARGET_POSITION, keepDistance)
                         )
-                ),
-                new BTRepeater(wayPoints.Length,
-                    new BTSequence(
-                        new BTCrossfadeAnimation(animator, "Rifle Walk", 1f),
-                        new BTGetNextPatrolPosition(wayPoints),
-                        new BTMoveToPosition(nmAgent, moveSpeed, VariableNames.V3_TARGET_POSITION, keepDistance)
                     )
                 )
             );
+            
 
         blackboard.SetVariable(VariableNames.BTBN_CURRENT_NODE, tree);
 
