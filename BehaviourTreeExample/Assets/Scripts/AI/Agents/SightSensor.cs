@@ -42,7 +42,8 @@ public class SightSensor : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, range, layerMask))
             {
-                if (hit.transform.GetComponent<Player>() != null)
+                Player player = hit.transform.GetComponent<Player>();
+                if (player != null && player?.IsDead == false)
                 {
                     blackboard.SetVariable(VariableNames.BOOL_IS_PLAYER_IN_SIGHT, true);
                     EventManager.InvokeEvent(EventType.SpottedPlayer);

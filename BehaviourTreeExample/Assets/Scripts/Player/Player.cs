@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
 {
+    public bool IsDead = false;
+
     public Transform Camera;
     [SerializeField] private float rotationSpeed = 180f;
     [SerializeField] private float moveSpeed = 3;
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour, IDamageable
     private float hor = 0;
     private Vector3 moveDirection;
     private Collider mainCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +64,12 @@ public class Player : MonoBehaviour, IDamageable
         
     }
 
-    public void TakeDamage(GameObject attacker, int damage)
+    public void TakeDamage(GameObject attacker)
     {
         animator.enabled = false;
+        IsDead = true;
+        EventManager.InvokeEvent(EventType.PlayerDied);
+
         var cols = GetComponentsInChildren<Collider>();
         foreach (Collider col in cols)
         {
@@ -103,15 +109,5 @@ public class Player : MonoBehaviour, IDamageable
         {
             animator.CrossFade(animationName, fadeTime);
         }
-    }
-
-    public void Damage()
-    {
-        Die();
-    }
-
-    private void Die()
-    {
-        Debug.Log("Died");
     }
 }

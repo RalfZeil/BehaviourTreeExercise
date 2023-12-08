@@ -29,7 +29,7 @@ public class BTAttack : BTBaseNode
         {
             if (collider.TryGetComponent(out IDamageable var))
             {
-                var.Damage();
+                var.TakeDamage(blackboard.GetVariable<Agent>(VariableNames.AGENT).gameObject);
             }
         }
 

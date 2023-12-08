@@ -5,6 +5,7 @@ public enum EventType
 {
     SpottedPlayer = 0,
     UnspottedPlayer = 1,
+    PlayerDied = 2,
 }
 
 public static class EventManager

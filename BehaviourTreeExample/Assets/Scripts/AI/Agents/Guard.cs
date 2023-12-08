@@ -13,6 +13,9 @@ public class Guard : Agent
     private void Start()
     {
         blackboard = new Blackboard();
+
+        EventManager.AddListener(EventType.PlayerDied, () => blackboard.SetVariable(VariableNames.BOOL_IS_TARGET_ALIVE, true));
+
         blackboard.SetVariable(VariableNames.INT_ENEMY_HEALTH, 100);
         blackboard.SetVariable(VariableNames.V3_TARGET_POSITION, new Vector3(0, 0, 0));
         blackboard.SetVariable(VariableNames.INT_CURRENT_PATROL_INDEX, -1);
@@ -22,6 +25,7 @@ public class Guard : Agent
         blackboard.SetVariable(VariableNames.BOOL_HAS_WEAPON, false);
         blackboard.SetVariable(VariableNames.AGENT, this);
         blackboard.SetVariable(VariableNames.V3_TARGET, player.transform.position);
+        blackboard.SetVariable(VariableNames.BOOL_IS_TARGET_ALIVE, false);
 
         GetComponent<SightSensor>().blackboard = blackboard;
 

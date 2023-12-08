@@ -13,4 +13,5 @@
     public const string V3_TARGET = "V3_TARGET";
     public const string BOOL_IS_PLAYER_TARGETED = "BOOL_IS_PLAYER_TARGETED";
     public const string V3_NEAREST_HIDING_SPOT = "V3_NEAREST_HIDING_SPOT";
+    public const string BOOL_IS_TARGET_ALIVE = "BOOL_IS_TARGET_ALIVE";
 }
